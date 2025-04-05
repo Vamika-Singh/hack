@@ -1,0 +1,373 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #fcfffd;
+    margin: 0;
+    padding: 0;
+    color: #264653;
+    overflow-x: hidden;
+    background-size: cover;
+}
+
+/* Splash Screen */
+#splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #e0f7fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 1s ease-out;
+}
+
+.splash-content {
+    text-align: center;
+}
+
+.splash-content h1 {
+    font-size: 1.5em;
+    color: #264653;
+}
+
+/* Pluto-like Dog */
+.pluto-dog {
+    position: relative;
+    width: 150px;
+    height: 100px;
+    margin: 0 auto 20px;
+}
+
+.dog-body {
+    width: 100px;
+    height: 50px;
+    background: #f4a261;
+    border-radius: 50px 50px 20px 20px;
+    position: absolute;
+    top: 30px;
+    left: 25px;
+}
+
+.dog-head {
+    width: 60px;
+    height: 60px;
+    background: #f4a261;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 10px;
+    z-index: 1;
+}
+
+.dog-ears {
+    width: 20px;
+    height: 40px;
+    background: #e76f51;
+    border-radius: 50% 50% 0 0;
+    position: absolute;
+    top: -10px;
+}
+
+.left-ear { left: 5px; transform: rotate(-20deg); }
+.right-ear { left: 35px; transform: rotate(20deg); }
+
+.dog-eyes {
+    width: 8px;
+    height: 8px;
+    background: #2c3e50;
+    border-radius: 50%;
+    position: absolute;
+    top: 20px;
+}
+
+.left-eye { left: 15px; animation: blink 2s infinite; }
+.right-eye { left: 35px; animation: blink 2s infinite; }
+
+.dog-nose {
+    width: 12px;
+    height: 10px;
+    background: #2c3e50;
+    border-radius: 50%;
+    position: absolute;
+    top: 40px;
+    left: 25px;
+}
+
+.dog-tongue {
+    width: 10px;
+    height: 15px;
+    background: #e63946;
+    border-radius: 0 0 50% 50%;
+    position: absolute;
+    top: 45px;
+    left: 28px;
+    animation: tongueWag 0.5s infinite alternate;
+}
+
+.dog-legs {
+    width: 15px;
+    height: 30px;
+    background: #f4a261;
+    border-radius: 10px;
+    position: absolute;
+    top: 50px;
+}
+
+.front-left { left: 20px; }
+.front-right { left: 40px; }
+.back-left { left: 60px; }
+.back-right { left: 80px; }
+
+.dog-tail {
+    width: 40px;
+    height: 10px;
+    background: #f4a261;
+    border-radius: 50px;
+    position: absolute;
+    top: 40px;
+    left: 100px;
+    transform-origin: left;
+    animation: tailWag 0.2s infinite alternate;
+}
+
+@keyframes blink {
+    0%, 90% { height: 8px; }
+    95% { height: 1px; }
+    100% { height: 8px; }
+}
+
+@keyframes tongueWag {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(5px); }
+}
+
+@keyframes tailWag {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(20deg); }
+}
+
+/* Main Content */
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    background-color: transparent;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+    text-align: center;
+    transition: all 0.5s ease;
+}
+
+.hidden {
+    display: none;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #2a9d8f;
+}
+
+.logo .voice-icon {
+    margin-right: 5px;
+}
+
+.voice-input {
+    background: #2a9d8f;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: white;
+}
+
+h1 {
+    color: #264653;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+h2 {
+    color: #264653;
+    font-size: 1.8em;
+    margin: 20px 0;
+}
+
+p {
+    color: #7f8c8d;
+    font-size: 1.2em;
+}
+
+.instruction {
+    color: #264653;
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+.cta-button {
+    padding: 12px 25px;
+    margin: 10px;
+    background: #2a9d8f;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: transform 0.3s, background 0.3s;
+}
+
+.cta-button:hover {
+    background: #1f776d;
+    transform: scale(1.05);
+}
+
+.voice-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background: #e0f7fa;
+    padding: 15px;
+    margin: 8px 0;
+    border-radius: 10px;
+    font-size: 1.1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#amazon-page, #zomato-page, #amazon-cart-page, #zomato-cart-page {
+    background: rgba(240, 248, 255, 0.95);
+}
+
+#amazon-items li, #zomato-items li {
+    background: #d5f5e3;
+}
+
+#amazon-cart li, #zomato-cart li, #order-items li {
+    background: #e0f7fa;
+}
+
+#amazon-total, #zomato-total, #order-total {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+#delivery-time {
+    color: #27ae60;
+    font-weight: bold;
+}
+
+.manual-add {
+    margin: 20px 0;
+}
+
+.manual-add input {
+    padding: 8px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    width: 80%;
+    max-width: 300px;
+}
+
+.manual-add button {
+    padding: 8px 15px;
+    background: #2a9d8f;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.manual-add button:hover {
+    background: #1f776d;
+}
+
+#order-confirmation-page {
+    background: rgba(255, 245, 230, 0.95);
+}
+
+form label {
+    font-size: 1.1em;
+    color: #264653;
+    margin: 10px 0;
+    display: block;
+}
+
+form input {
+    padding: 8px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    width: 80%;
+    max-width: 300px;
+}
+
+/* Cart Page */
+.cart-steps {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    color: #264653;
+    font-weight: bold;
+}
+
+.cart-steps span {
+    padding: 5px 10px;
+    background: #b2ebf2;
+    border-radius: 10px;
+}
+
+#amazon-cart li, #zomato-cart li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.quantity-controls button {
+    background: #2a9d8f;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.quantity-controls button:hover {
+    background: #1f776d;
+}
+
+.checkout-btn {
+    background: #264653;
+}
+
+.checkout-btn:hover {
+    background: #1f3a44;
+}

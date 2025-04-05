@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Shopping Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Splash Screen with Pluto-like Dog -->
+    <div id="splash-screen">
+        <div class="splash-content">
+            <div class="pluto-dog">
+                <div class="dog-head">
+                    <div class="dog-ears left-ear"></div>
+                    <div class="dog-ears right-ear"></div>
+                    <div class="dog-eyes left-eye"></div>
+                    <div class="dog-eyes right-eye"></div>
+                    <div class="dog-nose"></div>
+                    <div class="dog-tongue"></div>
+                </div>
+                <div class="dog-body">
+                    <div class="dog-legs front-left"></div>
+                    <div class="dog-legs front-right"></div>
+                    <div class="dog-legs back-left"></div>
+                    <div class="dog-legs back-right"></div>
+                </div>
+                <div class="dog-tail"></div>
+            </div>
+            <h1>Loading Your Voice Shopping Adventure...</h1>
+        </div>
+    </div>
+
+    <!-- Landing Page -->
+    <div class="container hidden" id="landing-page">
+        <header>
+            <div class="logo">
+                <span class="voice-icon">🎙️</span> Voice Shopping
+            </div>
+            <button class="voice-input" aria-label="Voice Command" onclick="startVoice()">
+                🎙️
+            </button>
+        </header>
+        <h1>Welcome to Voice Shopping</h1>
+        <p>Say "Register" or "Login" to begin</p>
+        <button class="cta-button" onclick="startVoice()">Start Voice</button>
+    </div>
+
+    <!-- Register Page -->
+    <div class="container hidden" id="register-page">
+        <header>
+            <div class="logo">
+                <span class="voice-icon">🎙️</span> Voice Shopping
+            </div>
+            <button class="voice-input" aria-label="Voice Command" onclick="startVoice()">
+                🎙️
+            </button>
+        </header>
+        <h1>Register</h1>
+        <p class="instruction">Say your details: "Name [name]", "Phone [number]", "Address [address]".</p>
+        <p class="instruction">Enter your Card details manually.</p>
+        <button class="cta-button voice-btn" onclick="startVoice()">🎙️ Start Voice</button>
+        <form onsubmit="event.preventDefault(); manualRegister();">
+            <label>Name: <input type="text" id="register-name" placeholder="Your Name"></label><br>
+            <label>Phone: <input type="text" id="register-phone" placeholder="Your Phone Number"></label><br>
+            <label>Address: <input type="text" id="register-address" placeholder="Your Address"></label><br>
+            <label>Card: <input type="text" id="register-card" maxlength="16" placeholder="Card Number"></label><br>
+            <button type="submit" class="cta-button">Register</button>
+        </form>
+        <div id="register-response"></div>
+    </div>
+
+    <!-- Login Page -->
+    <div class="container hidden" id="login-page">
+        <header>
+            <div class="logo">
+                <span class="voice-icon">🎙️</span> Voice Shopping
+            </div>
+            <button class="voice-input" aria-label="Voice Command" onclick="startVoice()">
+                🎙️
+            </button>
+        </header>
+        <h1>Login</h1>
+        <p class="instruction">Say "Login with [name]"</p>
+        <button class="cta-button voice-btn" onclick="startVoice()">🎙️ Start Voice</button>
+        <div id="login-response"></div>
+    </div>
+
+    <!-- Shopping Options Page -->
+    <div class="container hidden" id="shopping-page">
+        <header>
+            <div class="logo">
+                <span class="voice-icon">🎙️</span> Voice Shopping
+            </div>
+            <button class="voice-input" aria-label="Voice Command" onclick="startVoice()">
+                🎙️
+            </button>
+        </header>
+        <h1>Shopping Options</h1>
+        <p>Say "Grocery" for Amazon Fresh or "Food" for Zomato</p>
+        <button class="cta-button" onclick="startVoice()">Start Voice</button>
+    </div>
+
+    <!-- Amazon Add Items Page -->
+    <div class="container hidden" id="amazon-page">
+        <header>
+            <div class="logo">
+                <span class="voice-icon">🎙️</span> Voice Shopping
+            </div>
+            <button class="voice-input" aria-label="Voice Command" onclick="startVoice()">
+                🎙️
+            </button>
+        </header>
+        <h1>Fake Amazon Fresh</h1>
+        <ul id="amazon-items"></ul>
+        <button class="cta-button" onclick="showPage('amazon-cart-page')">Cart</button>
+        <button class="cta-button" onclick="startVoice()">Add Item (Voice)</button>
+        <form onsubmit="event.preventDefault(); manualAddToCart('amazon-page');" class="manual-add">
+            <input type="text" id="amazon-page-manual-item" placeholder="Item Name">
+            <input type="number" id="amazon-page-manual-quantity" placeholder="Quantity" min="1">
+            <button type="submit" class="cta-button">Add Manually</button>
+        </form>
+        <div id="amazon-response"></div>
+    </div>
+
+    <!-- Zomato Add Items Page -->
+    <div class="container hidden" id="zomato-page">
+        <header>
+            <div class="logo">
+                <span class="voice-icon">🎙️</span> Voice Shopping
+            </div>
+            <button class="voice-input" aria-label="Voice Command" onclick="startVoice()">
+                🎙️
+            </button>
+        </header>
+        <h1>Fake Zomato</h1>
+        <ul id="zomato-items"></ul>
+        <button class="cta-button" onclick="showPage('zomato-cart-page')">Cart</button>
+        <button class="cta-button" onclick="startVoice()">Add Item (Voice)</button>
+        <form onsubmit="event.preventDefault(); manualAddToCart('zomato-page');" class="manual-add">
+            <input type="text" id="zomato-page-manual-item" placeholder="Item Name">
+            <input type="number" id="zomato-page-manual-quantity" placeholder="Quantity" min="1">
+            <button type="submit" class="cta-button">Add Manually</button>
+        </form>
+        <div id="zomato-response"></div>
+    </div>
+
+    <!-- Amazon Cart Page -->
+    <div class="container hidden" id="amazon-cart-page">
+        <header>
+            <div class="logo">
+                <span class="voice-icon">🎙️</span> Voice Shopping
+            </div>
+            <button class="voice-input" aria-label="Voice Command" onclick="startVoice()">
+                🎙️
+            </button>
+        </header>
+        <h1>Shopping Cart</h1>
+        <div class="cart-steps">
+            <span>Voice</span>
+            <span>Finding</span>
+            <span>In Cart</span>
+            <span>Checkout</span>
+        </div>
+        <ul id="amazon-cart"></ul>
+        <p>Total: $<span id="amazon-total">0</span></p>
+        <button class="cta-button checkout-btn" onclick="checkout('amazon-cart-page')">Checkout</button>
+        <button class="cta-button" onclick="showPage('amazon-page')">Back to Add Items</button>
+    </div>
+
+    <!-- Zomato Cart Page -->
+    <div class="container hidden" id="zomato-cart-page">
+        <header>
+            <div class="logo">
+                <span class="voice-icon">🎙️</span> Voice Shopping
+            </div>
+            <button class="voice-input" aria-label="Voice Command" onclick="startVoice()">
+                🎙️
+            </button>
+        </header>
+        <h1>Shopping Cart</h1>
+        <div class="cart-steps">
+            <span>Voice</span>
+            <span>Finding</span>
+            <span>In Cart</span>
+            <span>Checkout</span>
+        </div>
+        <ul id="zomato-cart"></ul>
+        <p>Total: $<span id="zomato-total">0</span></p>
+        <button class="cta-button checkout-btn" onclick="checkout('zomato-cart-page')">Checkout</button>
+        <button class="cta-button" onclick="showPage('zomato-page')">Back to Add Items</button>
+    </div>
+
+    <!-- Order Confirmation Page -->
+    <div class="container hidden" id="order-confirmation-page">
+        <header>
+            <div class="logo">
+                <span class="voice-icon">🎙️</span> Voice Shopping
+            </div>
+            <button class="voice-input" aria-label="Voice Command" onclick="startVoice()">
+                🎙️
+            </button>
+        </header>
+        <h1>Order Confirmation</h1>
+        <p>Thank you! Your order has been placed.</p>
+        <p>It will be delivered in <span id="delivery-time"></span> minutes.</p>
+        <p>Total cost was $<span id="order-total"></span>.</p>
+        <h2>Items Purchased</h2>
+        <ul id="order-items"></ul>
+        <button class="cta-button" onclick="showPage('shopping-page'); speak('Back to shopping options. Say Grocery or Food to continue.');">Back to Shopping</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
